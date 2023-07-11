@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+ul,
+ol,
+li,
+h1 {
+    list-style: none;
+
+}
+
+ul,
+p,
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+em {
+    font-style: normal;
+}
+
+input {
+    border: 0rem;
+    outline: none
+}
+
+button {
+    border: 0rem;
+}
