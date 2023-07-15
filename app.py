@@ -1,6 +1,11 @@
-from flask import Flask,request,jsonify
+from flask import Flask, request, render_template, redirect, url_for
+import sqlite3
 
 app = Flask(__name__)
-@app.route("/post")
-def post():
-    return render_template("post.html")
+conn = sqlite3.connect('database.db')
+cur = conn.cursor()
+
+class User:
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
