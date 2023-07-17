@@ -35,7 +35,7 @@
 			document.getElementById('register').addEventListener('tap',function(){
 				var username=document.getElementById("username").value;
 				var pwd=document.getElementById("pwd").value;
-				mui.post('http:',{
+				mui.post('http://127.0.0.1:80',{
 					username:username,
 					pwd:pwd
 				},function(data){
