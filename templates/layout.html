@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>{% block title %}首页{% endblock %}</title>
+    <link href="./static/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./static/css/index.css">
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    <div class="mui-content" id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- 底部导航 -->
+    <nav class="mui-bar mui-bar-tab menu">
+        <a data-id="/" class="mui-tab-item">
+            <span class="mui-icon mui-icon-home"></span>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a data-id="/post" class="mui-tab-item">
+            <span class="mui-icon mui-icon-compose"></span>
+            <span class="mui-tab-label">发帖</span>
+        </a>
+        <a data-id="/setting" class="mui-tab-item">
+            <span class="mui-icon mui-icon-gear"></span>
+            <span class="mui-tab-label">设置</span>
+        </a>
+        <a data-id="/login" class="mui-tab-item">
+            <span class="mui-icon mui-icon-person"></span>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+
+    <script src="./static/js/mui.min.js"></script>
+    <script>
+        mui.init(); // 初始化 MUI
+
+        mui('.menu').on('tap', 'a', function () {
+            var targetPage = this.getAttribute('data-id'); // 获取目标页面路径
+            mui.openWindow({
+                url: targetPage,
+                id: targetPage
+            }); // 打开目标页面
+        });
+
+        (function (mui, window) {
+            var currentPge = location.pathname; // 获取当前页面路径
+            var menuItems = document.querySelectorAll('.menu .mui-tab-item');
+
+            for (var i = 0; i < menuItems.length; i++) {
+                var menuItem = menuItems[i];
+                var targetPage = menuItem.getAttribute('data-id');
+                if (targetPage === currentPge) {
+                    menuItem.classList.add('mui-active'); // 添加活动状态类
+                } else {
+                    menuItem.classList.remove('mui-active'); // 移除活动状态类
+                }
+            }
+        })(mui, window);
+
+        {% block js %} {% endblock %}
+    </script>
+</body>
+
+</html>

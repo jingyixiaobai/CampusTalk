@@ -5,15 +5,15 @@
 		<meta charset="utf-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="css/mui.css" rel="stylesheet" />
-		<link href="css/login.css" rel="stylesheet">
+		<link href="./static/css/mui.css" rel="stylesheet" />
+		<link href="./static/css/login.css" rel="stylesheet">
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">登录</h1>
-			<button class="mui-btn-link mui-pull-right"  id="register">注册</button>
+			<button class="mui-btn-link mui-pull-right"  id="register-btn">注册</button>
 		</header>
 		<div class="mui-content">
 			<form class="mui-input-group" id="login">
@@ -26,25 +26,34 @@
 			        <input id="pwd" type="password" class="mui-input-password" placeholder="请输入密码">
 			    </div>
 			    <div class="mui-button-row">
-			        <button type="button" class="mui-btn mui-btn-primary" id="login" >确认登录</button>
-	
+			        <button type="button" class="mui-btn mui-btn-primary" id="login-btn" >确认登录</button>
+
 			    </div>
 			</form>
 		</div>
-		<script src="js/mui.js"></script>
+		<script src="./static/js/mui.js"></script>
 		<script type="text/javascript">
-			mui.init()
-			// 点击登录按钮触发
-			document.getElementById("login").addEventListener('tap',function(){
+			document.getElementById("login-btn").addEventListener('tap',function(){
 				var username=document.getElementById("username").value;
 				var pwd=document.getElementById("pwd").value;
-				mui.post('http://127.0.0.1:80',{
+				mui.post('/login',{
 					username:username,
 					pwd:pwd,
 				},function(data){
 					if(data.errorMessage==null){
 						mui.toast(data.message)
-						mui.openWindow('index','index',{})
+						let backUrl = '/'
+						if (data?.back){
+							backUrl = data.back
+						}
+						mui.openWindow({
+						url: backUrl,
+						id: '/',
+						styles: {
+							top: '0px',
+							bottom: '0px'
+						}
+					});
 					}
 					else{
 						mui.toast(data.errorMessage)
@@ -52,9 +61,9 @@
 						},'json'
 				);
 			})
-			
-			document.getElementById('register').addEventListener('tap',function(){
-				mui.openWindow('register.html','register',{
+
+			document.getElementById('register-btn').addEventListener('tap',function(){
+				mui.openWindow('register','register',{
 					styles:{
 						bottom:"50px"
 					}

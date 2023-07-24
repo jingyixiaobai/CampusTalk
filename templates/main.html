@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block title %}首页{% endblock %}
+{% block css %}
+<link href="./static/css/main.css" rel="stylesheet" />
+
+{% endblock%}
+
+{% block content %}
+
+
+<header class="mui-bar mui-bar-nav">
+	<h1 class="mui-title">首页</h1>
+</header>
+<div class="mui-content">
+	{% for article in articles %}
+	<div class="mui-card">
+		<!--页眉,放置作者信息、发表时间-->
+		<div class="mui-card-header mui-card-media">
+			<img src="../images/logo.png" />
+			<div class="mui-media-body">
+				{{ article.author.username }}
+				<p>发表于 {{ article.create_time }}</p>
+			</div>
+		</div>
+		<!--内容区-->
+		<div class="mui-card-content">
+			<div class="article-title">{{ article.title }}</div>
+			<span class="article-content">{{ article.content }}</span>
+		</div>
+		<div class="mui-card-footer">
+
+		</div>
+	</div>
+	{% endfor %}
+
+	{% endblock %}

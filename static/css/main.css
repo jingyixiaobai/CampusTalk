@@ -1,0 +1,19 @@
+.mui-card-footer {
+    padding: 0rem;
+    height: 1rem;
+}
+
+.article-title {
+    font-weight: 600;
+    font-size: 1.0625rem;
+    padding: 0.5rem;
+}
+
+.article-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding: 0 0.5rem;
+}
