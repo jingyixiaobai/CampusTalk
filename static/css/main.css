@@ -3,12 +3,6 @@
     height: 1rem;
 }
 
-.article-title {
-    font-weight: 600;
-    font-size: 1.0625rem;
-    padding: 0.5rem;
-}
-
 .article-content {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -16,4 +10,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     padding: 0 0.5rem;
+}
+.mui-card-footer {
+    min-height: 2rem;
 }

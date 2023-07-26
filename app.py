@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import Flask, render_template, request, jsonify, session, redirect
 from extension import db
-from models import User, Reply, Article
+from models import User, Article
 from datetime import datetime
 import os
 
@@ -92,11 +92,9 @@ def post():
 
         title = request.form.get('title')
         content = request.form.get('content')
-        if not title or not content:
-            return jsonify({'message': '发布失败', 'errorMessage': '标题或内容不能为空'})
-        if len(title) > 30:
-            return jsonify({'message': '发布失败', 'errorMessage': '标题不能超过30个字'})
-        article = Article(title=title, content=content, author_id=session["user_id"])
+        if not content:
+            return jsonify({'message': '发布失败', 'errorMessage': '内容不能为空'})
+        article = Article(content=content, author_id=session["user_id"])
         db.session.add(article)
         db.session.commit()
         return jsonify({'message': '发布成功', 'errorMessage': None})
@@ -107,6 +105,14 @@ def post():
 def setting():
     return render_template('setting.html')
 
+
+@app.route('/article_detail/<int:article_id>')
+def article_detail(article_id):
+    article = db.session.get(Article, article_id)
+    if article:
+        return render_template('article_detail.html', article=article)
+    else:
+        return render_template('404.html'), 404
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)
